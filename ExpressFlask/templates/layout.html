@@ -1,0 +1,109 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+        <title>Gecko Blog</title>
+
+
+		<link rel="stylesheet" href="{{url_for('static',filename='css/new.css')}}">
+        <link rel="stylesheet" href="{{url_for('static',filename='css/new2.css')}}">
+		
+		
+     
+
+        	{% if title %}
+		<title>Flask Blog-{{title}}</title>
+	{% else %}
+		<title>Flask Blog</title>
+	{% endif %}
+
+    </head>
+
+    <body>
+
+            
+                     <header>
+
+            <div class="alternatlogo">GeckoBlog
+
+            </div>
+               
+
+                <nav>
+
+                    <ul>
+                      <!-- 
+                       <li><a href ="/geckomod.html" class="main-ul-navleft main-ul-navleft-logo"  >GeckoBlog</a></li>
+                      -->
+                        
+                        <li><a class="active main-ul-navleft" href ="/home" >Home</a></li>
+                        <li><a class="active main-ul-navleft" href="/about">About</a></li>
+                        <li><a class="active main-ul-navright" href="/register">Register</a></li>
+                        <li><a class="active main-ul-navright" href="/login">Login</a></li>
+                    </ul>
+
+                </nav>
+
+        </header>
+
+        
+            <div class="clearfloataftaheader">
+            </div>
+
+
+
+            <div class="wrap">    
+
+                <section>
+
+                    <div class="articlesdiv firstdiv ">
+
+                        <!-- flash messages can come here-->
+                       
+            <!-- actual templates can be inserted in between block content -->
+            
+                        {% block content %}{% endblock %}
+
+                     </div>
+
+
+                     <div class="articlesdiv seconddiv  ">
+
+                                              
+                                              <h3>Our Sidebar</h3>
+                                              <br/>
+                <p class=' '>You can put any information here you'd like.
+                  <ul class=" secondivlist">
+                    <li class=" ">Latest Posts</li>
+                    <li class=" ">Announcements</li>
+                    <li class=" ">Calendars</li>
+                    <li class=" ">etc</li>
+                  </ul>
+                </p>
+
+
+                    </div>
+
+
+            </section>
+
+            </div>
+
+
+        <div class="clearfloataftasection"></div>
+
+     
+        <footer>
+
+            &copy;2014 Rodney Kwao Llc
+
+        </footer>
+                    
+
+    </body>
+
+
+
+</html>

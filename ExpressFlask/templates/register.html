@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block content %}
+                
+                            <div class="mainlogindiv">
+
+                                    <h1>Join Today </h1>
+
+
+
+
+                          <form action = "http://localhost:5000/regfunc" method = "post">
+
+                                      <fieldset>
+                                        <legend>Personalia:</legend>
+                                        <label for="frstname">First name</label>
+                                            <br/>
+                                        <input type="text" id="frstname" name="fname">
+                                        
+                                        
+
+                                        <br><br>
+
+
+                                        <label for="lstname">Last name</label>
+                                            <br/>
+                                        <input type="text" id="lstname" name="lname"><br><br>
+
+                                        
+                                         
+
+
+                                        <!--date of birth should be put here -->
+
+
+                                        <label for="usrname">Username</label>
+                                            <br/>
+                                        <input type="text" id="usrname" name="username"><br><br>
+
+
+                                        <label for="email">Email</label>
+                                            <br/>
+                                        <input type="email" id="email" name="email" placeholder="xxxxxxx@xmail.com"><br><br>
+
+
+                                        <label for="paswd">Password</label>
+                                            <br/>
+                                        <input type="Password" id="paswd"  name="password" placeholder="minimum 6 characters"><br><br>
+
+
+
+                                        <label for="confirm_paswd">Confirm Password</label>
+                                            <br/>
+                                        <input type="Password" id="confirm_paswd" name="confirm_password"><br><br>
+
+
+                                        <input type="submit" >
+
+                                        </fieldset>
+                                        </form>
+
+                                    <p> Already a member , <a href="/login" >Sign In </a></p>
+                             </div>
+                
+{% endblock content %}
+
+
+
+
+     

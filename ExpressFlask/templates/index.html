@@ -1,0 +1,41 @@
+
+				{% extends "layout.html" %}
+				{% block content %}
+
+					
+                            {% if reg_username : %}
+
+                                         <div  class="formfsrt" ><p> Account created for {{reg_username }} </p> </div>
+                           
+                           {% elif login_username: %}
+                            
+                                          <div  class="formfsrt" ><p> Welcome {{login_username}} </p> </div>
+    
+                           
+                            {% endif %}
+
+
+                        {% for post in post_variable %}
+                     
+   
+
+
+
+                                                         <div class="firstmiddivspace">
+                                                                <a class="centeritem" href="#">{{ post.author }}</a>
+                                                                <small class="centeritem">{{ post.date_posted }}</small>
+
+                                                            <hr class="solid">
+                                                            </hr>
+                                                
+
+                                                                <h2><a class="centeritem" href="#">{{ post.title }}</a></h2>
+
+                                                                <p class="centeritem">{{ post.content }}</p>
+
+                                                         </div>
+
+                                        
+                                {% endfor %}
+                                                 
+				{% endblock content %}

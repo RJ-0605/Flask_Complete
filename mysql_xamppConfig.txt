@@ -1,0 +1,105 @@
+
+Prior to these makes ure you have installed mysql libraries necessary to make python work and it is running 
+espescially in using      
+
+
+                mysql.connector.connect 
+
+                    OR 
+                    
+                  mysql.connector 
+
+
+
+
+
+
+ ?  NB : i made these changes to the socket in  my.cnf file in /opt/lampp/etc/my.cnf
+
+ 					          starts from below
+                        		:
+                      	   \ /
+
+
+# NB : The following options will be passed to all MySQL clients
+[client]
+#password	= your_password
+port		=3306
+#socket		=/opt/lampp/var/mysql/mysql.sock
+socket		=/var/lib/mysqld/mysqld.sock
+
+                      		  :
+                      	   \ /
+                         the END
+
+
+
+
+ ?  NB : i also made these changes to the socket in  my.cnf file in /etc/mysql/my.cnf
+
+                      starts from below
+                      		  :
+                      	   \ /
+
+# * IMPORTANT: Additional settings that can override those from this file!
+#   The files must end with '.cnf', otherwise they'll be ignored.
+#
+
+!includedir /etc/mysql/conf.d/
+!includedir /etc/mysql/mysql.conf.d/
+
+
+[mysqld]
+socket=/var/lib/mysql/mysql.sock
+
+[client]
+socket=/path/to/socket
+ 
+                       		  :
+                      	   \ /
+                         the END
+
+
+
+
+
+ ?  NB : i also made this changes in the flask app to listen to the port of the xampp that is after starting the xampp way ahead so it choses port 3306 first 
+
+                      starts from below
+                      	   	:
+                      	   \ /
+
+#  ADDING  these configurations helped with  
+
+#    connecting xampp mysql server   WITH  flask-mysqldb 
+
+#  app.config['MYSQL_UNIX_SOCKET']='/opt/lampp/var/mysql/mysql.sock'    
+#  app.config['MYSQL_PORT']=3306
+
+
+                         		:
+                      	   \ /
+                         the END
+
+
+                     ?     Last but not least 
+
+not for forgetting  i created a new user for my sql and gave it priviledges and passing a mynativepassword to it also created same user name with ssame password in xampp user account and granted it all access to all databases with grant Elisha taught me which i saw on the internet. 
+
+By granting permission after creating user and going to general mysql without standing in any database and writing the code  below ;
+
+GRANT ALL PRIVILEGES ON database_name.* TO 'username'@'localhost';
+
+
+
+GRANT ALL PRIVILEGES ON *.* TO 'username'@'localhost';
+
+NB : over here we realise  database_name is * so it  makes the user have access accross all databases.
+
+
+
+
+
+
+
+   ALWays Switch XAMMPP mysql on first before trying to use mysql.connector

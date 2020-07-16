@@ -1,0 +1,45 @@
+
+{% extends 'layoutblog.html' %}
+
+
+
+
+{% block login %}
+
+
+
+
+  <div class="formclass">
+
+            <form action="/regfunc" id="form" method="POST" >
+             <fieldset>
+              <legend >Signup:</legend>
+              <br><br>
+              <label for="fname">First name:</label><br><br>
+              <input type="text" id="fname" name="fname"><br><br>
+              <label for="lname">Last name:</label><br><br>
+              <input type="text" id="lname" name="lname"><br><br>
+
+              <label for="usrname">Username</label><br><br>              
+              <input type="text" id="usrname" name="username"><br><br>
+
+              
+
+              <label for="birthdat"> Date of Birth:</label><br><br>
+              <input type="date" id="birthdat" name="birthday" placeholder="dd/mm/yyyy"><br><br>
+
+
+              <label for="email">Email:</label><br><br>
+              <input type="email" id="email" name="email" placeholder="xxxxxxx@xmail.com"><br><br>
+              <label for="pswd">Password:</label><br><br>
+              <input type="password" id="pswd" name="password"><br><br><br>
+              <label for="cfirmpswd">Confirm Password:</label><br><br>
+              <input type="password" id="cfirmpswd" name="confirm_password"><br><br><br>
+              <input type="submit" value="Submit"><p>Already a member <a href="/loginblog">login</a></p>
+
+             </fieldset>
+            </form>
+
+          </div>
+
+{% endblock login %}

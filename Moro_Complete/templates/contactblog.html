@@ -1,0 +1,48 @@
+
+
+{% extends 'layoutblog.html' %}
+
+
+
+
+{% block login %}
+
+
+
+              <div class="formclass">
+
+            <form action="/userfunc" id="form" method='POST'>
+             <fieldset>
+              <legend >Contact Us:</legend>
+              
+
+              {% if display  %}
+
+				
+                   
+				<br><br>
+              <!-- displaynothing -->
+              
+ 				
+
+       			{% else  %}
+
+       			<br><br>
+       			<label for="email">Please fill in your Email</label><br><br>
+              <input type="email" id="email" name="email" placeholder="johndoe@gmail.com"><br><br><br>
+
+              
+                {% endif %}
+
+              <label for="msg">Message:</label><br><br>
+              <textarea  id="msg" name="msg" > </textarea><br><br>
+              
+              <input type="submit" value="Submit"> 
+             </fieldset>
+            </form>
+
+          </div>
+
+
+
+{% endblock login %}

@@ -1,0 +1,35 @@
+
+
+{% extends 'layoutblog.html' %}
+
+
+
+
+{% block login %}
+
+
+        
+
+
+              <div class="formclass" style="height:400px;">
+
+            <form action="/loginfunc"  method='POST' id="form"style="height:350px;">
+             <fieldset>
+              <legend >LOGIN:</legend>
+              <br><br>
+       
+              <label for="usrnmemail">Email/username:</label><br><br>
+              <input type="text" id="usrnmemail" name="usernam_email"><br><br><br>
+              <label for="pswd">Password:</label><br><br>
+              <input type="password" id="pswd" name="password"><br><br>
+              <input type="submit" value="Submit"> 
+
+              <p><a href="/signupblog">Register</a> Today</p>
+             </fieldset>
+            </form>
+
+          </div>
+
+{% endblock login %}
+
+

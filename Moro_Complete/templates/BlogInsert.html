@@ -1,0 +1,92 @@
+
+{% extends 'layoutblog.html' %}
+
+
+    
+ {% block body%} 
+
+   <div class="row">   
+
+          <div class="leftcolumn">
+
+                       
+
+                       
+                <div class="card">
+
+                        <h2>TITLE HEADING</h2>
+                        <h5>Title description, Dec 7, 2017</h5>
+                        <div class="fakeimg" style="height:300px;"><img src="../static/imgs//urban.jpg" style="width:100%; height:100%" >
+                        </div>
+                        <p>Some text..</p>
+
+                </div>
+
+                <div class="card">
+
+                    <h2>TITLE HEADING</h2>
+                    <h5>Title description, Sep 2, 2017</h5>
+                    <div class="fakeimg" style="height:300px;">
+                        <img src="../static/imgs/djpic.jpg" style="width:100%; height:100%" >
+                    </div>
+                    <p>Some text..</p>
+
+
+                </div>
+
+                {% for blogdet in blogdetails:  %}
+
+                <div class="card">
+                   <h2>{{blogdet.get('title')}}</h2>
+                   <h5>{{blogdet.get('username')}}, Sep 2, 2017</h5>
+                   <div class="fakeimg" style="height:300px;">
+                        <img src="../static/imgs/uploads/{{blogdet.get('image')}} " style="width:100%; height:100% ;" alt=''>
+                    </div>
+                    <p>{{blogdet.get('blogcomments')}}</p>
+
+                  </div>
+                {%  endfor  %}
+
+
+
+          </div>
+     
+
+
+
+        {% block side%} 
+            <div class="rightcolumn">
+
+                            <div class="card">
+                              <h2>About Us</h2>
+                              <div class="fakeimg" style="height:100px;"><img src="../static/imgs/michelangelo1.jpg" style="width:100%; height:100%" ></div>
+                              <p>Contrary to popular belief, Lorem Ipsum is not simply <a href="about.html">Read More..</a></p>
+                            </div>
+                            <div class="card">
+                              <h3>Popular Post</h3>
+                              <div class="fakeimg"><img src="../static/imgs/spark.jpg" style="width:100%; height:50%" ></div><br>
+                              <div class="fakeimg"><img src="../static/imgs/audience_about.jpg" style="width:100%; height:40%" ></div><br>
+                              <div class="fakeimg"><img src="../static/imgs/concert.jpg" style="width:100%; height:30%" ></div>
+                            </div>
+
+
+                            <div class="card" style="height:170px;">
+                              <h3>Follow Me</h3>
+                              <p>Some text..</p>
+                              <img src="../static/imgs/facebook1.png" id="favicons">
+                              <img src="../static/imgs/twitter1.png" id="favicons">
+                              <img src="../static/imgs/insta1.png" id="favicons">
+                              <img src="../static/imgs/googleplus.png" id="favicons">
+                            </div>
+
+
+                         </div>
+
+
+
+        {% endblock side%}
+
+
+  </div>
+
+ {% endblock body%}

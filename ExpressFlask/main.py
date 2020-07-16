@@ -1,10 +1,18 @@
-from flask import Flask, redirect, url_for, request, render_template
+
+from flask import Flask, redirect, url_for, request, render_template,session
 from validatorex import Register_validator , Login_validator
 
 from flask_mysqldb import MySQL
 
 
+
+
 app = Flask(__name__)
+
+# must later genrate a sepearate function or import for generating 
+# seperate key for session .
+
+app.secret_key = '67fe0e4d2a60c56aac5b2362b1ded716'
 
 # code for starting xampp  sudo /opt/lampp/lampp start
 # 
@@ -47,41 +55,44 @@ mysql=MySQL(app)
 
 
 posts = [
-	{'author':'Corey Schafer',
-	 'title':'Blog post 1',
-	 'content':'First post content',
-	 'date_posted':'April 20,2018'
+   {'author':'Corey Schafer',
+    'title':'Blog post 1',
+    'content':'First post content',
+    'date_posted':'April 20,2018'
 
-	 },
-	 {
-	 'author':'Jane Doe',
-	 'title':'Blog post 2',
-	 'content':'Second post content',
-	 'date_posted':'April 21,2018'
+    },
+    {
+    'author':'Jane Doe',
+    'title':'Blog post 2',
+    'content':'Second post content',
+    'date_posted':'April 21,2018'
 
-	 },
-	 {
-	 'author':'Aanet Doly',
-	 'title':'Blog post 3',
-	 'content':'Third post content',
-	 'date_posted':'April 27,2018'
+    },
+    {
+    'author':'Aanet Doly',
+    'title':'Blog post 3',
+    'content':'Third post content',
+    'date_posted':'April 27,2018'
 
-	 }
+    }
  
 ]
 
 
 @app.route('/')
 @app.route('/home')
-def index():
-   return render_template("index.html",post_variable=posts)
+def home():
+   if 'loggedin' in session :
+      return render_template("index.html",post_variable=posts, username=session['username'])
+
+   return redirect(url_for('login'))
 
 
 @app.route('/about')
 def about():
 
-#	return ("<h1>Hello World</h1>
-	return render_template("about.html",title=about)
+#  return ("<h1>Hello World</h1>
+   return render_template("about.html",title=about)
 
 # this shows the main route url name i choose is independent of the function 
 # just thst it helps in the future to make your work less complicated and helps you understand the linkage
@@ -123,6 +134,11 @@ def success(name):
    
 @app.route('/regfunc',methods = ['POST', 'GET'])
 def regload():
+
+
+   # redirect from the register function i set a variable here 
+    # and catch it if it exists that is if 
+
    msg=''
    if request.method == 'POST':
 
@@ -160,7 +176,7 @@ def regload():
          
             # return redirect(url_for('register', reg_username=msg))
 
-            return msg
+           # return render_template('register.html',reg_msg=msg)
 
             # else if there was no successful retrieval that means that information does not exist so we can add new input to the RegisterAccount
          else:
@@ -174,19 +190,22 @@ def regload():
             mysql.connection.commit()
 
             print(cur.rowcount, "record inserted.")
-
-
+            # redirect from the register function  to the login function 
+            # i set a variable here 
+             # and catch it if it exists that is if 
             msg=f"Account {username} created successfully "
             
-            return msg
+            return render_template('login.html', login_msg=msg)
 
          
 
       else:
-         msg = "Please fill out form "
-         return redirect(url_for('register', reg_username=msg))
          
-      return render_template("index.html",post_variable=posts, reg_username=msg)
+         msg = "Please fill out form "
+         #return redirect(url_for('register', reg_username=msg))
+         
+         
+   return render_template('register.html', reg_username=msg)
 
 
 
@@ -194,6 +213,9 @@ def regload():
 
 @app.route('/loginfunc',methods = ['POST'])
 def loginload():
+
+
+
    if request.method == 'POST':
 
       usernamemail = str(request.form.get('usernam_email')).lower()
@@ -214,8 +236,8 @@ def loginload():
          # cur.execute('USE myfirstdatabase')
 
          # try fetching  from either username also try fetching from email , usernamemail in general refers to input that can hold both email    
-	 # and    username 
-	 # per what is given as an input 
+    # and    username 
+    # per what is given as an input 
 
          cur.execute( 'SELECT * FROM  RegisterAccount WHERE username=%s OR email=%s' , ( usernamemail , usernamemail, )  )
          ueaccount=cur.fetchone() 
@@ -225,7 +247,7 @@ def loginload():
          cur.execute( 'SELECT * FROM  RegisterAccount WHERE  password=%s' , (  passwd,))
          paccount=cur.fetchone()
 
-				
+            
          if  ueaccount and  paccount:
             cur.execute( 'SELECT username FROM  RegisterAccount WHERE username=%s OR email=%s' , ( usernamemail , usernamemail, )  )
             usnmaccount=cur.fetchone()
@@ -234,7 +256,16 @@ def loginload():
             # there because i used Dictcursor property
             usn=usnmaccount['username']
 
-            return render_template("index.html",post_variable=posts, login_username=usn)
+            #  session begins here we can use the id of the the row that the ueaccount 
+            # gave to us or the id that the password paccount gave to us 
+            # since SELECT * picks the entire row where a particular column with a value is used to inspect.
+            
+            session['loggedin']=True
+            session['id']= ueaccount['id']
+            session['username']=ueaccount['username']
+
+            # return render_template("index.html",post_variable=posts, login_username=usn)
+            return redirect(url_for('home'))
 
          else:
             msg= "invalid login details "
@@ -244,9 +275,27 @@ def loginload():
       else:
 
          # this is thrown because of the LoginVlidator in validatorex
-         msg= "invalid login syntax"
+         msg= "invalid login syntax or login field is empty"
 
-   return msg
+
+
+
+
+   return  render_template('login.html', login_msg=msg)
+
+
+
+
+
+
+@app.route('/logout')
+def logout():
+    # Remove session data, this will log the user out
+   session.pop('loggedin', None)
+   session.pop('id', None)
+   session.pop('username', None)
+   # Redirect to login page
+   return redirect(url_for('login'))
 
 
 

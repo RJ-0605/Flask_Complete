@@ -1,0 +1,37 @@
+
+*{
+    margin:0px;
+}
+
+body{
+ 
+    
+    background-image: linear-gradient(rgba(0, 0, 255, 0.5), rgba(144, 144, 143, 0.5)),
+                                     url("../static/images/gecko.png");
+}
+
+
+.extlogindiv{
+
+    border:solid green 2px;
+    width: 700px; 
+    height:1000px;
+    margin:10px auto;
+    background-color:transparent;
+
+
+}
+
+.mainlogindiv{
+
+    border:solid green 2px;
+    width: 600px; 
+    height:550px;
+    margin:10px auto;
+    padding:15px;
+    background-color:whitesmoke;
+
+
+}
+
+

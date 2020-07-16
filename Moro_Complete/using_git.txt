@@ -1,0 +1,164 @@
+Git: Merge Branch into Master
+
+
+One of Git's most powerful features is the ability to easily create and merge branches. Git's distributed nature encourages users to create new branches often and to merge them regularly as a part of the development process. This fundamentally improves the development workflow for most projects by encouraging smaller, more focused, granular commits.
+
+In legacy version control systems (like CVS) the difficulty of merging restricted it to advanced users. Other modern but centralized version control systems like Subversion require commits to be made to a central repository, so a nimble workflow with local branching and merging is atypical.
+
+A commonly used branching workflow in Git is to create a new code branch for each new feature, bug fix, or enhancement. These are called Feature Branches. Each branch compartmentalizes the commits related to a particular feature. Once the new feature is complete – i.e. a set of changes has been committed on the feature branch – it is ready to be merged back into the master branch (or other main code line branch depending on the workflow in use).
+
+The git branch command is used to list all existing branches in a repository. An asterisk will appear next to the currently active branch.
+
+$ git branch
+* master
+To create a new branch, we can use the command git branch new-branch. This will create a new branch mirroring the commits on the currently active branch.
+
+$ git branch new-branch
+$ git branch
+* master
+new-branch
+As a brief aside, keep in mind that behind the scenes Git does not actually create a new set of commits to represent the new branch. In Git, a branch is really just a tag. It is a label that we can use to reference a particular string of commits.
+ It would be inefficient to duplicate a set of commits behind the scenes, so Git allows us to create multiple diverging sets of commits from a single base.
+
+At this point we have created a new branch, but are still located on the source branch. To start working on the new branch we first need to run the command git checkout new-branch. This will change the active branch to the new branch.
+
+$ git checkout new-branch
+Switched to branch ‘new-branch'
+$ git branch
+master
+* new-branch
+At this point, commits can be made on the new branch to implement the new feature. Once the feature is complete, the branch can be merged back into the main code branch (usually master).
+
+First we run git checkout master to change the active branch back to master. Then we run the command git merge new-branch to merge the new feature into the master branch. Note that git merge merges the specified branch into the currently active branch. So we need to be on the branch that we are merging into.
+
+# ...develop some code...
+
+$ git add –A
+$ git commit –m "Some commit message"
+$ git checkout master
+Switched to branch 'master'
+$ git merge new-branch
+If all goes well then our job is done. The new feature commits now appear in the master branch. However, it is possible that Git won't be able to complete the merge due to a conflict change in the source branch. This is called a merge conflict and it will be discussed in a separate article.
+
+To summarize, here are the commands to create a new branch, make some commits, and merge it back into master:
+
+
+**************************************************************************************************************************************************************
+
+Important      Summary      Notice 
+
+
+
+****************************************************************************
+
+
+
+$ git checkout master
+$ git branch new-branch
+$ git checkout new-branch
+
+# ...develop some code...
+
+$ git add –A
+$ git commit –m "Some commit message"
+$ git checkout master
+$ git merge new-branch
+
+
+**********************************************************************************
+
+to delete a branch 
+
+*****************************************
+// delete branch locally
+git branch -d localBranchName
+
+use -d when the branch has been merged with master branch 
+
+
+use -D when the branch has not been merged with master branch
+
+
+
+
+// delete branch remotely
+git push origin --delete remoteBranchName
+
+
+
+***********************************
+ to unstage all files
+ ->type git reset 
+
+******************************************************************************************************************
+
+
+More for Unstage
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+To remove files from stage use reset HEAD where HEAD is the last commit of the current branch. This will unstage the file but maintain the modifications.
+
+git reset HEAD <file>
+
+
+
+To revert the file back to the state it was in before the changes we can use:
+
+git checkout -- <file>
+
+
+
+To remove a file from disk and repo use git rm and to remove a directory use the -r flag:
+
+git rm '*.txt'
+git rm -r <dirname>
+
+
+
+If we want to remove a file from the repository but keep it on disk, say we forgot to add it to our .gitignore file then use --cache:
+
+git rm <filename> --cache
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
+for git configuration on laptop .
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+for global access 
+
+git config --global user.name "testuser"
+git config --global user.email "testuser@example.com"
+
+
+''''''''''''''''''''''''''''''
+for specified access 
+
+git config  user.name "testuser"
+git config  user.email "testuser@example.com"
+
+''''''''''''''''''''''''''''''''''''
+
+
+
+
+How to clone a branch from a master repo. in github
+
+
+this is hte format 
+
+$ git clone -b <branch> <remote_repo>
+
+For example :
+
+
+$ git clone -b dev https://github.com/username/project.git
+
+To check the current branch you have cloned you use this command , and it 
+should show  you the name of the branch you have cloned
+
+$ git branch

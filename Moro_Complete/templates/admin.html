@@ -1,0 +1,42 @@
+
+{% extends 'layoutblog.html' %}
+
+
+
+
+{% block login %}
+
+
+        
+
+
+        <div class="formclass" style="height:400px;">
+
+
+                <form action='/adminfunc' enctype="multipart/form-data" method='POST' style='color:grey;'>
+
+                    <label for="title">Title</label>
+                        <br/>
+                 <input type="text" id="title" name="blogtitle"><br/><br/>
+
+                 <input type='file' placeholder="filename" name="bpicture"> <br/><br/>
+
+                 <label for="msg">Blog Comments</label>
+                        <br/>
+                 <textarea  id="msg" name="blogcomments" > </textarea>
+
+                 <br><br>
+
+
+                
+
+
+
+                <input type='submit'/>
+
+                </form>
+
+
+          </div>
+
+{% endblock login %}

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %}
+                                
+
+
+                                {% if login_msg: %}
+                            
+                                          <div  class="errorformfsrt" ><p>  {{login_msg}} </p> </div>
+    
+                           
+                                {% endif %}
+
+                    <div class="mainlogindiv">
+
+                            <h1>Login here </h1>
+
+                                            <br/> <br/>
+
+                        <form action='/loginfunc' method='POST'>
+                                                
+                                                
+                                      <label for="usrname">Username/Email</label>
+                                                <br/>
+                                            <input type="text" id="usrname" name="usernam_email"><br><br>
+
+
+                                          <!--  <label for="email">Email</label>
+                                                <br/>
+                                            <input type="email" id="email" name="email"><br><br>
+
+                                            -->
+
+
+                                            <label for="paswd">Password</label>
+                                                <br/>
+                                            <input type="Password" id="paswd" name="password"><br><br>
+                                            
+
+                                        
+                                                <input type='submit'/>
+
+                    </form>
+                            <p> Join us today <a href="/register" >Sign Up </p> <a href='/mylogin'>test</a>
+                        </div>
+
+
+
+{% endblock content %}

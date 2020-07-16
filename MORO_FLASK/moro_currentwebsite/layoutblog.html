@@ -1,0 +1,107 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <meta charset="UTF-8">
+    <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Moro Blog</title>
+
+
+                <link rel="stylesheet" href="{{url_for('static',filename='css/blog.css')}}">
+               
+
+
+                <link  type="text/css" rel="stylesheet" href="css/blog.css" />
+
+            </head>
+
+          
+      <body>
+
+
+
+
+        <div class=wrap>
+
+        <div class="navsticky">
+          <!-- the navsticky is meant mainly for the homepage and scrolling -->
+
+          <nav class="navbig navsmall navsmallest">
+
+                    <ul>
+                        <li><a href ="Blog.html" >Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="signup.html">Signup</a></li>
+                    </ul>
+                </nav>
+
+
+            <div class="header">
+
+
+
+
+              <h2>Welcome to Moro's Hub</h2>
+
+            </div>
+
+
+
+        </div>
+
+            <div class="row">
+
+              <div class="leftcolumn">
+
+                    <!-- python code will be here found here for inserting the bloginsert or aboutinsert.html -->
+
+                    {% block content %}{% endblock %}
+
+
+              </div>
+
+
+          <div class="rightcolumn">
+
+                <div class="card">
+                  <h2>About Us</h2>
+                  <div class="fakeimg" style="height:100px;"><img src="imgs/michelangelo1.jpg" style="width:100%; height:100%" ></div>
+                  <p>Contrary to popular belief, Lorem Ipsum is not simply <a href="about.html">Read More..</a></p>
+                </div>
+                <div class="card">
+                  <h3>Popular Post</h3>
+                  <div class="fakeimg"><img src="imgs/spark.jpg" style="width:100%; height:50%" ></div><br>
+                  <div class="fakeimg"><img src="imgs/audience_about.jpg" style="width:100%; height:40%" ></div><br>
+                  <div class="fakeimg"><img src="imgs/concert.jpg" style="width:100%; height:30%" ></div>
+                </div>
+
+
+                <div class="card" style="height:170px;">
+                  <h3>Follow Me</h3>
+                  <p>Some text..</p>
+                  <img src="imgs/facebook1.png" id="favicons">
+                  <img src="imgs/twitter1.png" id="favicons">
+                  <img src="imgs/insta1.png" id="favicons">
+                  <img src="imgs/googleplus.png" id="favicons">
+                </div>
+
+
+             </div>
+          </div>
+
+            <div class="footer">
+              <h2>   &copy; 2014 Moro Corporation Llc  </h2>
+            </div>
+
+
+
+        </div>
+    </body>
+
+
+
+  </html>

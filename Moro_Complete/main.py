@@ -377,7 +377,7 @@ def regload():
             # message="You have been registered successfully a number will be sent to you "
             # server=smtplib.SMTP_SSL("smtp.gmail.com",465)
             # # server=smtplib.SMTP_SSL(host,port)
-            # server.login("rodneytetteh@gmail.com","kbdrukfcjqghmrum")
+            # server.login("rodneytetteh@gmail.com","app_password")
             # # server.login(user,app_password)
             # server.sendmail("rodneytetteh@gmail.com",email,message)
             # # server.sendmail(user,to,message.as_string())

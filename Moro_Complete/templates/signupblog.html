@@ -1,8 +1,18 @@
 
 {% extends 'layoutblog.html' %}
 
+{% if registerpage %}
 
 
+  {% block nav%}
+
+<a href ='/blogdata' >Home</a>
+<a href='/aboutinsert'>About</a>
+
+
+  {% endblock nav %}
+  
+  {% endif  %}
 
 {% block login %}
 

@@ -2,6 +2,21 @@
 
 {% extends "layoutblog.html" %}
 
+{% if aboutpage %}
+
+
+  {% block nav%}
+
+<a href ='/blogdata' >Home</a>
+<a href='/aboutinsert'>About</a>
+
+
+  {% endblock nav %}
+
+    {% endif %}
+
+
+
 		{% block body %}
 
 
@@ -28,37 +43,5 @@
 
         
 
-        {% block side %}  
-
-
-        <div class="rightcolumn">
-
-                            <div class="card">
-                              <h2>About Us</h2>
-                              <div class="fakeimg" style="height:100px;"><img src="../static/imgs/michelangelo1.jpg" style="width:100%; height:100%" ></div>
-                              <p>Contrary to popular belief, Lorem Ipsum is not simply <a href="about.html">Read More..</a></p>
-                            </div>
-                            <div class="card">
-                              <h3>Popular Post</h3>
-                              <div class="fakeimg"><img src="../static/imgs/spark.jpg" style="width:100%; height:50%" ></div><br>
-                              <div class="fakeimg"><img src="../static/imgs/audience_about.jpg" style="width:100%; height:40%" ></div><br>
-                              <div class="fakeimg"><img src="../static/imgs/concert.jpg" style="width:100%; height:30%" ></div>
-                            </div>
-
-
-                            <div class="card" style="height:170px;">
-                              <h3>Follow Me</h3>
-                              <p>Some text..</p>
-                              <img src="../static/imgs/facebook1.png" id="favicons">
-                              <img src="../static/imgs/twitter1.png" id="favicons">
-                              <img src="../static/imgs/insta1.png" id="favicons">
-                              <img src="../static/imgs/googleplus.png" id="favicons">
-                            </div>
-
-
-                         </div>
-
-
-
-        {% endblock  side %}
+       
         

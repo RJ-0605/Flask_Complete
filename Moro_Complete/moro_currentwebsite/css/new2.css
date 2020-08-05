@@ -1,0 +1,75 @@
+
+
+hr.solid {
+  border-top: 3px solid #bbb;
+  width:350px;
+  margin:5px auto 15px auto;
+}
+
+
+.centeritem{
+		padding-left:10px;
+
+
+}
+
+
+/*  css for  register.html   */
+
+
+
+.mainlogindiv{
+
+    border:solid green 2px;
+    border-radius: 3px;
+    width: 400px; 
+    height:auto;
+    margin:20px auto;
+    padding:15px;
+    background-color:whitesmoke;
+
+
+}
+
+
+
+
+
+
+/* About us page css */
+
+
+/* general login flash message */
+
+.formfsrt{
+  border:solid green 2px;
+  border-radius: 2px ;
+  width: auto; 
+  height:auto;
+  background-color:rgb(101, 180, 98);
+  color:rgb(3, 70, 6);
+
+  padding:0.5px;
+  text-align:center;
+
+
+
+}
+
+
+/* wrong login or register flash message */
+
+.errorformfsrt{
+  border:solid red 2px;
+  border-radius: 3px ;
+  width: auto; 
+  height:auto;
+  background-color:rgb(218, 117, 117);
+  color:rgb(251, 21, 0);
+
+  padding:0.5px;
+  text-align:center;
+
+
+
+}

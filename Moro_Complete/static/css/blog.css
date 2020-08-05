@@ -1,199 +1,115 @@
-* {
-  box-sizing: border-box;
-}
+
+/* stylelint-disable selector-list-comma-newline-after */
 
 body {
   font-family: Arial;
   padding: 20px;
   /* background: #f1f1f1; */
-  background-image: url("../imgs/thunder.jpg");
+  background-image: url("../imgs/fogforest.jpg");
 }
 
-.wrap{
 
-  width:70% ;
-  height:auto;
-  margin:30px auto;
-  
-
-  
-}
-/* Header/Blog Title */
-
-
-/* mamin wrap around the columns */
-
- nav {
-
-    float:right;
-    margin-right:34%;
-    margin-top: 20px;
+.blog-header {
+  line-height: 1;
+  border-bottom: 1px solid #e5e5e5;
 }
 
- .navsmallest{
-    padding:0.5px;
+.blog-header-logo {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: 2.25rem;
+}
 
+.blog-header-logo:hover {
+  text-decoration: none;
+}
 
- }
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+}
 
- nav li{
-    display: inline;
-    font-size:12px;
-
-    margin:20px;
-
+.display-4 {
+  font-size: 2.5rem;
+}
+@media (min-width: 768px) {
+  .display-4 {
+    font-size: 3rem;
   }
-
-    
- nav li a {
-    
-    text-decoration: none;
-
 }
-   
-.header {
-  padding: 30px;
-  font-size: 40px;
+
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
   text-align: center;
-  background: white;
-  height:30%;
-
-  
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
 
-
-
-.navsticky{
-position: -webkit-sticky;
-  position: sticky;
-  top: 10px;
+.nav-scroller .nav-link {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: .875rem;
 }
 
-/* Create two unequal columns that floats next to each other */
-/* Left column */
-.leftcolumn {
-  float: left;
-  width: 75%;
+.card-img-right {
+  height: 100%;
+  border-radius: 0 3px 3px 0;
 }
 
-/* Right column */
-.rightcolumn {
-  float: left;
-  width: 25%;
-  padding-left: 20px;
- /* margin-left:40px */
+.flex-auto {
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
 }
 
-/* Fake image */
-.fakeimg {
-  background-color: #aaa;
-  width: 100%;
-  padding: 20px;
+.h-250 { height: 250px; }
+@media (min-width: 768px) {
+  .h-md-250 { height: 250px; }
 }
 
-/* Add a card effect for articles */
-.card {
-  background-color: white;
-  width:100%;
-  padding: 20px;
-  margin-top: 20px;
+/* Pagination */
+.blog-pagination {
+  margin-bottom: 4rem;
+}
+.blog-pagination > .btn {
+  border-radius: 2rem;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+/*
+ * Blog posts
+ */
+.blog-post {
+  margin-bottom: 4rem;
+}
+.blog-post-title {
+  margin-bottom: .25rem;
+  font-size: 2.5rem;
+}
+.blog-post-meta {
+  margin-bottom: 1.25rem;
+  color: #999;
 }
 
-
-.formclass{
-   background:white; 
-  /* background-image: url("../imgs/mic1.jpg"); */
-  padding:20px;
-  margin-top:8px
-}
-
-
-#form{
-  border-radius:3px;
-  background:whitesmoke;
-  height:70%;
-  width:50%;
-  padding:10px;
-}
-
-#msg{
-  width:65%;
-  height:100px;
-}
-
-/* Footer */
-.footer {
-  padding: 20px;
+/*
+ * Footer
+ */
+.blog-footer {
+  padding: 2.5rem 0;
+  color: #999;
   text-align: center;
-  background: #ddd;
-  margin-top: 20px;
-  font-size:10px
+  background-color: #f9f9f9;
+  border-top: .05rem solid #e5e5e5;
 }
-
-
-
-
-
-
-
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 800px) {
-
- nav{
-
-  width :100 %;
-  margin-right:0 %;
- }
-
-nav li{
-    display: inline;
-    font-size:12px;
-
-    margin:5px;
-
-  }
-
-
-  .wrap{
-  width:90%;
-  margin:15px auto;
-
-  }
-
-/* Header/Blog Title */
-.header {
-  padding: 15px;
-  font-size: 20px;
-  text-align: center;
-  background: white;
-  
-}
-
- 
-  .leftcolumn, .rightcolumn {
-    width: 100%;
-    padding: 0;
-  }
-
-#form{
-  border-radius:5px;
-  height:70%;
-  width:90%;
-  padding:10px;
-}
-
- 
-
-.favicons{
-
-  height:50%;
-}
-  
+.blog-footer p:last-child {
+  margin-bottom: 0;
 }

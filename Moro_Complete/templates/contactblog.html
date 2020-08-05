@@ -3,12 +3,22 @@
 {% extends 'layoutblog.html' %}
 
 
+{% if contactpage %}
+
+
+  {% block nav%}
+
+<a href ='/blogdata' >Our Location</a>
+
+
+
+  {% endblock nav %}
+
+
+{% endif %}
 
 
 {% block login %}
-
-
-
               <div class="formclass">
 
             <form action="/userfunc" id="form" method='POST'>
@@ -16,15 +26,10 @@
               <legend >Contact Us:</legend>
               
 
-              {% if display  %}
-
-				
+              {% if display  %}	
                    
 				<br><br>
               <!-- displaynothing -->
-              
- 				
-
        			{% else  %}
 
        			<br><br>
@@ -42,7 +47,6 @@
             </form>
 
           </div>
-
 
 
 {% endblock login %}

@@ -1,0 +1,223 @@
+/* this file is concerned with the main structure or the layout.html for index.html */
+
+
+*{
+    margin:0px;
+}
+
+body{
+ 
+    
+    background-image: linear-gradient(rgba(0, 0, 255, 0.5), rgba(144, 144, 143, 0.5)),
+                                     url("images/gecko.png");
+                    
+    
+
+
+}
+
+
+
+header{
+    
+    margin-top:0px;
+    height:60px;
+    
+    padding:10px;
+    text-align: center;
+    background-color:darkblue;   
+}
+
+
+
+
+.alternatlogo{
+    margin-top:10px;
+    float:left;
+    margin-left: 270px;
+    font-weight:500;
+    font-size: 30px;
+    color:orange;
+}
+
+
+header nav {
+    
+    float:left;  
+    height:40px;
+    width: 800px;  
+    margin-left:50px;
+    
+    
+}
+
+ul{        
+    
+    height:50px;
+    width:700px;  
+    
+
+    
+}
+
+header nav li{
+    
+    height:40px;
+    display: inline;
+    font-size:15px;
+
+    text-align:center; 
+    margin-bottom: 12px;
+    padding: auto;
+    
+
+   
+}
+
+
+
+.main-ul-navleft {
+
+     margin-top:20px;
+    float:left;
+    height:30px;
+    margin-right:20px;
+    text-align:center;
+}
+.main-ul-navright {
+
+     margin-top:20px;
+    float:right;
+    margin-right:20px;
+    height:30px;
+    text-align:center;
+}
+
+.active:hover{
+    color:yellow;
+}
+
+
+header nav  a  {
+    
+    
+    text-decoration: none;
+    color :rgb(255,69,0);
+
+
+}
+
+.clearfloataftaheader{
+    clear: left;
+} 
+
+
+
+.wrap{
+
+    border:solid green 2px;
+    border-radius: 2px;
+
+    width: 900px; 
+    height:1000px;
+    margin:10px auto;
+    background-color:transparent;
+ /*this will be  the distance  of the top of the section to the .container wrapper */ 
+    padding:5px ;
+    
+    }
+
+    .articlesdiv{
+
+        border:solid green 2px;
+        border-radius: 2px;
+
+        display: inline;
+        float:left;
+    }
+    
+    .firstdiv{
+    
+        width: 450px; 
+        
+        
+        margin:10px 30px 60px 25px;
+        background-color:transparent;
+     /*this will be  the distance  of the top of the section to the .container wrapper */ 
+        padding:5px ;
+        color:grey;
+    
+    }
+
+    .firstmiddivspace{
+
+    margin-bottom:40px;
+    height:250px;
+    background-color:whitesmoke;
+}
+
+
+
+
+    .seconddiv{
+
+        width: 250px; 
+        height:350px;
+        
+        margin:10px 5px 20px 10px;
+        
+        background-color:whitesmoke;
+     /*this will be  the distance  of the top of the section to the .container wrapper */ 
+        padding:5px ;
+        color:grey;
+    
+    }
+
+
+    .secondivlist{
+
+        list-style-type: none;
+        margin-top:10px;
+        width: 150px;
+    
+    
+    
+    
+    }
+    
+    
+    .secondivlist >li{
+        border:solid grey 2px;
+        width:150px;
+        height:30px;
+        padding-left:15px;
+        padding-top:5px;
+    }
+    
+
+   
+    .clearfloataftasection{
+    clear: left;
+} 
+
+
+
+
+
+
+
+
+footer{
+
+    
+    width:400px;
+    margin:80px auto 15px auto;
+    padding-top:40px ;
+    color :rgb(255, 60, 0);
+    font-size: medium;
+    text-align: center;
+
+    
+   
+
+}

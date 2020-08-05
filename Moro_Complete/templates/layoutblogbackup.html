@@ -1,0 +1,116 @@
+<!-- layoutblogbackup -->
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+  <meta charset="UTF-8">
+    <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Moro Blog</title>
+
+
+                <link rel="text/stylesheet" href="{{url_for('static',filename='css/blog.css')}}">
+                <link rel="text/javascript" href="{{url_for('static',filename='js/NewNavbar.js')}}">
+               
+
+
+                <
+
+            </head>
+
+          
+      <body>
+
+
+
+
+        <div class=wrap>
+
+        <div class="navsticky">
+          <!-- the navsticky is meant mainly for the homepage and scrolling -->
+
+          <nav class="navbig navsmall navsmallest">
+
+                    <ul>
+
+
+                      <li><a href ='/blogdata' >Home</a></li>
+                      <li><a href='/aboutinsert'>About</a></li>
+
+{% block nav%}
+
+  
+
+  {% endblock nav %}
+                        <li><a href='/contactblog'>Contact Us</a></li>
+                        <li><a href='/signupblog'>Signup</a></li>
+                        <li><a href='/loginblog'>Login</a></li>
+                        <li><a href='/logout'>Logout</a></li>
+
+                        <!-- will be loaded for only admin login soon -->
+                        <li><a href='/admin'>Admin</a></li>
+                        
+
+                    </ul>
+                </nav>
+
+
+            <div class="header">
+
+
+
+
+              <h2>Welcome to Moro's Hub</h2>
+
+            </div>
+
+
+
+        </div>
+
+
+          
+            
+          <!-- these are the block that can serve for the left and right column in bloginsert and about blog -->
+                  
+
+                  
+                  {% block body%}
+
+                  <!-- the block is inside because it can be replaced for and left column side that the current htmlpage will provide   -->
+
+                        
+
+                  {% endblock body%}
+
+                  {% block side%} 
+                        {% endblock side%}
+
+  
+                <!-- this block will service signup login and contact us might even service the admin page for admin to add to blog -->
+
+
+                  {% block login %}
+
+
+                  {% endblock login %}
+           
+
+
+
+
+            <div class="footer">
+              <h2>   &copy; 2014 Moro Corporation Llc  </h2>
+            </div>
+
+
+
+        </div>
+    </body>
+
+
+
+  </html>

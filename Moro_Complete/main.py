@@ -4,7 +4,11 @@ from validatorex import Register_validator , Login_validator
 
 from flask_mysqldb import MySQL
 
-
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.header import Header
+import smtplib
+import os
 
 
 app = Flask(__name__)
@@ -53,7 +57,7 @@ mysql=MySQL(app)
 
 
 
-
+app_password = #
 
 
 posts = [
@@ -82,7 +86,20 @@ posts = [
 
 msg=""
 
-@app.route('/')
+
+@app.route('/testemplate' )
+def testemplate():
+  homepage=''
+   # sideright=''
+  return render_template("Blog.html")
+
+@app.route('/testemplate2' )
+def testemplate2():
+  homepage=''
+   # sideright=''
+  return render_template("carousel.html")
+
+
 @app.route('/home')
 def home():
    if 'loggedin' in session :
@@ -91,10 +108,84 @@ def home():
    return redirect(url_for('login'))
 
 
+@app.route('/bloginsert' )
+def bloginsert():
+  homepage=''
+   # sideright=''
+  return render_template("BlogInsert.html",homepage=homepage)
 
 # this is the new route created for the new blog bloginsert 
+@app.route('/')
+@app.route('/blogdata' )
+def blogdata():
+
+  homepage=''
+
+  if 'loggedin' in session :
+    cur = mysql.connection.cursor()
+    cur.execute( 'SELECT * FROM  Blogtable')
+    blogdetails=cur.fetchall()
+    return render_template('BlogInsert.html',homepage=homepage ,msg=msg,blogdetails=blogdetails, username=session['username'] )
+ 
+  return redirect(url_for('bloginsert'))
+  
 
 
+@app.route('/admin' )
+def admin():
+  adminpage=''
+  if 'adminpriv' in session :
+
+     # sideright=''
+    return render_template("admin.html",adminpage=adminpage)
+
+  else:
+    msg="you are not an admin"
+    #return msg
+    return render_template("admin.html",adminpage=adminpage)
+
+
+
+
+
+@app.route('/adminfunc', methods=['POST','GET'])
+def adminfunc():
+
+  msg=''
+
+  if request.method == 'POST':
+    image=request.files['bpicture']
+    title=request.form.get('blogtitle')
+    blogcomments=request.form.get('blogcomments')
+
+    username='kobby'
+    filename=image.filename
+    image.save('./static/imgs/uploads/'+filename)
+    imagesavdsucesful= True
+
+    if imagesavdsucesful :
+
+      cur = mysql.connection.cursor()
+
+      sql = "INSERT INTO Blogtable (title,blogcomments,username,image)VALUES (%s, %s , %s,%s)"
+      val=(title,blogcomments,username,filename)
+
+      cur.execute(sql, val)
+
+      mysql.connection.commit()
+
+      print(cur.rowcount, "Record inserted.")
+
+    else:
+      msg='Image not saved successful'
+      print("Record not inserted.")
+
+#these are outside they post so they work with the automatic get request
+  # cur = mysql.connection.cursor()
+  # cur.execute( 'SELECT * FROM  Blogtable')
+  # blogdetails=cur.fetchall()
+
+  return render_template('admin.html')
 
 
 @app.route('/signupblog' )
@@ -110,13 +201,19 @@ def loginblog():
   return render_template("loginblog.html")
 
 
+
+
+
+
+
 @app.route('/contactblog' )
 def contactblog():
+  contactpage=''
   if 'loggedin' in session :
     displaynoemail=True
-    return render_template("contactblog.html",display='displaynoemail')
+    return render_template("contactblog.html",contactpage=contactpage,display='displaynoemail')
    # sideright=''
-  return render_template("contactblog.html")
+  return render_template("contactblog.html", contactpage=contactpage)
 
 
 @app.route('/userfunc',methods = ['POST', 'GET'])
@@ -151,6 +248,40 @@ def userfunc():
       mysql.connection.commit()
 
       print(cur.rowcount, "record inserted.")
+      # any sending of mail to me  will be done here 
+      loginmail='rodneytetteh@gmail.com'
+      user = 'rodneytetteh@gmail.com'
+
+      # insert app_password here in the future instead of describing it at the beginning
+
+      host = 'smtp.gmail.com'
+      port = 465
+      to = 'jedikwao@gmail.com'
+
+      # subject = 'Moro Blog Comments  Sent from   '+ emailmsg
+      subject = 'Moro Blog Comments '
+      # message main content 
+      content = message +'\n'+'Sent by\n ' + emailmsg
+      
+
+      ### Define email ###
+      message = MIMEMultipart()
+      # add From 
+      message['From'] = Header(user)
+      # add To
+      message['To'] = Header(to)     
+      # add Subject
+      message['Subject'] = Header(subject)
+      # add content text
+      message.attach(MIMEText(content, 'plain', 'utf-8'))
+          
+      ### Send email ###
+      server = smtplib.SMTP_SSL(host, port) 
+      server.login(loginmail, app_password)
+      server.sendmail(user, to, message.as_string()) 
+      server.quit() 
+      print('Sent email successfully')
+            
 
 
 
@@ -158,84 +289,14 @@ def userfunc():
 
 
 
-@app.route('/bloginsert' )
-def bloginsert():
-
-   # sideright=''
-  return render_template("BlogInsert.html")
 
 
 
 
 
-@app.route('/blogdata' )
-def blogdata():
-
-  
-
- if 'loggedin' in session :
-
-    cur = mysql.connection.cursor()
-    cur.execute( 'SELECT * FROM  Blogtable')
-    blogdetails=cur.fetchall()
-    return render_template('BlogInsert.html',msg=msg,blogdetails=blogdetails)
-
- return render_template("BlogInsert.html")
-  
-
-@app.route('/admin' )
-def admin():
-
-  if 'adminpriv' in session :
-
-     # sideright=''
-    return render_template("admin.html")
-
-  else:
-    msg="you are not an admin"
-    return msg
 
 
 
-
-
-@app.route('/adminfunc', methods=['POST','GET'])
-def adminfunc():
-
-  msg=''
-
-  if request.method == 'POST':
-    image=request.files['bpicture']
-    title=request.form.get('blogtitle')
-    blogcomments=request.form.get('blogcomments')
-
-    username='kobby'
-    filename=image.filename
-    image.save('./static/imgs/uploads/'+filename)
-    imagesavdsucesful= True
-
-    if imagesavdsucesful :
-
-      cur = mysql.connection.cursor()
-
-      sql = "INSERT INTO Blogtable (title,blogcomments,username,image)VALUES (%s, %s , %s,%s)"
-      val=(title,blogcomments,username,filename)
-
-      cur.execute(sql, val)
-
-      mysql.connection.commit()
-
-      print(cur.rowcount, "record inserted.")
-
-    else:
-      msg='Image not saved successful'
-
-#these are outside they post so they work with the automatic get request
-  # cur = mysql.connection.cursor()
-  # cur.execute( 'SELECT * FROM  Blogtable')
-  # blogdetails=cur.fetchall()
-
-  return render_template('admin.html')
 
 
 
@@ -246,13 +307,15 @@ def adminfunc():
 @app.route('/aboutinsert')
 def aboutinsert():
    sideright=''
-   return render_template("aboutinsert.html")
+   aboutpage=''
+   return render_template("aboutinsert.html",aboutpage=aboutpage)
 
 
 @app.route('/regfunc',methods = ['POST', 'GET'])
 def regload():
 
-
+   registerpage=''
+   loginpage=''
    # redirect from the register function i set a variable here 
     # and catch it if it exists that is if 
 
@@ -309,12 +372,60 @@ def regload():
             mysql.connection.commit()
 
             print(cur.rowcount, "record inserted.")
+            # send mail to user that account is created in the future we can create a link to login 
+            # for the user to login with 
+            # message="You have been registered successfully a number will be sent to you "
+            # server=smtplib.SMTP_SSL("smtp.gmail.com",465)
+            # # server=smtplib.SMTP_SSL(host,port)
+            # server.login("rodneytetteh@gmail.com","kbdrukfcjqghmrum")
+            # # server.login(user,app_password)
+            # server.sendmail("rodneytetteh@gmail.com",email,message)
+            # # server.sendmail(user,to,message.as_string())
+            # server.quit()
+            # print('Sent email successfully')
+
+
+            loginmail='rodneytetteh@gmail.com'
+            user = 'rodneytetteh@gmail.com'
+
+      # insert app_password here in the future instead of describing it at the beginning
+
+            host = 'smtp.gmail.com'
+            port = 465
+            to = email
+
+            subject = 'Moro Corp'
+            # message main content 
+            content = 'You have been registered successfully a number will be sent to you '
+            
+
+            ### Define email ###
+            message = MIMEMultipart()
+            # add From 
+            message['From'] = Header(user)
+            # add To
+            message['To'] = Header(to)     
+            # add Subject
+            message['Subject'] = Header(subject)
+            # add content text
+            message.attach(MIMEText(content, 'plain', 'utf-8'))
+                
+            ### Send email ###
+            server = smtplib.SMTP_SSL(host, port) 
+            server.login(loginmail, app_password)
+            server.sendmail(user, to, message.as_string()) 
+            server.quit() 
+            print('Sent email successfully')
+            
+            
+            
+            
             # redirect from the register function  to the login function 
             # i set a variable here 
              # and catch it if it exists that is if 
             msg=f"Account {username} created successfully "
             
-            return render_template('loginblog.html', login_msg=msg)
+            return render_template('loginblog.html',loginpage=loginpage,login_msg=msg)
 
          
 
@@ -322,9 +433,10 @@ def regload():
          
          msg = "Please fill out form "
          #return redirect(url_for('register', reg_username=msg))
+         # return render_template('signupblog.html',registerpage=registerpage, reg_username=msg)
          
          
-   return render_template('signupblog.html', reg_username=msg)
+   return render_template('signupblog.html',registerpage=registerpage, reg_username=msg)
 
 
 
@@ -334,7 +446,7 @@ def regload():
 @app.route('/loginfunc',methods = ['POST'])
 def loginload():
 
-
+   loginpage=''
 
    if request.method == 'POST':
 
@@ -407,7 +519,7 @@ def loginload():
 
 
 
-   return  render_template('login.html', login_msg=msg)
+   return  render_template('login.html',loginpage=loginpage,login_msg=msg)
 
 
 
